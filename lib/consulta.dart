@@ -1,4 +1,5 @@
 import 'package:consulta_aporte_ciudadano/Aporte.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
 class Consulta extends StatefulWidget {
@@ -22,18 +23,39 @@ class _Consulta extends State<Consulta> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: _floatingBtn(),
       backgroundColor: Colors.white,
       appBar: _appBar(),
       body: SafeArea(
           child: Center(
         child: Container(
           width: 400,
-          height: 500,
+          height: 450,
           child: _body(),
         ),
       )),
     );
   }
+
+  Widget _floatingBtn() {
+    return FloatingActionButton.extended(
+      elevation: 10.0,
+      onPressed: () {
+        _launchURL();
+      },
+      icon: Icon(Icons.language),
+      label: Text("lopdam"),
+    );
+  }
+
+_launchURL() async {
+  const url = "https://lopdam.github.io";
+  if (await canLaunch(url)) {
+    await launch(url, forceWebView: true);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
   AppBar _appBar() {
     return AppBar(
@@ -44,7 +66,7 @@ class _Consulta extends State<Consulta> {
 
   Widget _body() {
     return ListView(
-      children: <Widget>[_cardInputContainer(), _cardOutputContainer()],
+      children: <Widget>[_cardInputContainer(), _cardOutputContainer(),],
     );
   }
 
@@ -59,6 +81,7 @@ class _Consulta extends State<Consulta> {
       child: _cardOutput(),
     );
   }
+
 
   Widget _cardInput() {
     return Card(
@@ -104,7 +127,7 @@ class _Consulta extends State<Consulta> {
         cursorColor: Colors.black,
         decoration: InputDecoration(
           prefixIcon: const Icon(
-            Icons.attach_money,
+            Icons.monetization_on,
           ),
           suffixText: "USD",
           hintText: "Ingresar Sueldo",
@@ -123,7 +146,7 @@ class _Consulta extends State<Consulta> {
       splashColor: Colors.white,
       color: Colors.green[700],
       child: Text(
-        "  Consultar  ",
+        "   Consultar   ",
         style: TextStyle(color: Colors.white, fontSize: 15.0),
       ),
       onPressed: () {
@@ -166,7 +189,7 @@ class _Consulta extends State<Consulta> {
           children: <Widget>[
             ListTile(
               leading: Icon(
-                Icons.monetization_on,
+                Icons.attach_money,
                 size: 50,
                 color: Colors.white,
               ),
@@ -181,7 +204,7 @@ class _Consulta extends State<Consulta> {
             ),
             ListTile(
               leading:
-                  Icon(Icons.monetization_on, size: 50, color: Colors.white),
+                  Icon(Icons.attach_money, size: 50, color: Colors.white),
               title: Text(
                 _meses,
                 style: TextStyle(color: Colors.white),
@@ -197,4 +220,5 @@ class _Consulta extends State<Consulta> {
       ),
     );
   }
+
 }

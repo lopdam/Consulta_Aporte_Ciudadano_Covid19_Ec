@@ -1,3 +1,4 @@
+import 'dart:math';
 class Aporte {
   double _sueldo;
   double _mes;
@@ -99,19 +100,24 @@ class Aporte {
     _meses=_cantidadMeses*_mes;
   }
 
+  double _roundDouble(double value, int places){ 
+   double mod = pow(10.0, places); 
+   return ((value * mod).round().toDouble() / mod); 
+}
+
   String getMes(){
-    return _mes.toString();
+    return _roundDouble(_mes,2).toString();
   }
 
   String getMeses(){
-    return _meses.toString();
+    return _roundDouble(_meses,2).toString();
   }
 
   String gettarifaBasica(){
     return _tarifaBasica.toString();
   }
   String getvalorExedente(){
-    return _valorExedente.toString();
+    return _roundDouble(_valorExedente,2).toString();
   }
 
   String getfraccionExedente(){
