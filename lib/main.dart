@@ -6,7 +6,6 @@ void main() {
     title: 'Flutter Demo',
     theme: ThemeData(
       primarySwatch: Colors.blue,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
     home: Consulta(title: 'Consulta Aporte Ciudadano Covid19 Ecuador'),
   ));
